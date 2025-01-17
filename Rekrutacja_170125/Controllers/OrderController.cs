@@ -21,17 +21,25 @@ namespace Rekrutacja_170125.Controllers
         //public async Task<IActionResult> GetSumOfOrdersValuesInShopsWithEvenIdSQL()
         //{
         //    var sqlQuery = @"
-        //        SELECT 
+        //        SELECT
+        //            o.Id AS OrderId,
         //            o.ShopId,
-        //            SUM(p.NetPrice * op.Quantity) AS TotalNetValue
-        //        FROM Orders o
-        //        INNER JOIN OrderProducts op ON o.Id = op.OrderId
-        //        INNER JOIN Products p ON op.ProductId = p.Id
-        //        WHERE o.ShopId % 2 = 0
-        //        AND o.ClientId IN (
-        //            SELECT c.Id FROM Clients c WHERE LOWER(c.City) LIKE '%w%'
-        //        )
-        //        GROUP BY o.ShopId
+        //            SUM(op.Quantity * p.NetPrice) AS TotalNetValue
+        //        FROM
+        //            Orders o
+        //        JOIN
+        //            OrderProducts op ON o.Id = op.OrderId
+        //        JOIN
+        //            Products p ON op.ProductId = p.Id
+        //        JOIN
+        //            Clients c ON o.ClientId = c.Id
+        //        WHERE
+        //            o.ShopId % 2 = 0
+        //            AND LOWER(c.City) LIKE '%w%'
+        //        GROUP BY
+        //            o.Id, o.ShopId
+        //        ORDER BY
+        //            o.Id;
         //    ";
 
         //    var formattableStringQuery = FormattableStringFactory.Create(sqlQuery);
@@ -45,29 +53,51 @@ namespace Rekrutacja_170125.Controllers
         //}
 
 
-        //[HttpGet("entityframework")]
-        //public async Task<IActionResult> GetSumOfOrdersValuesInShopsWithEvenIdByEF()
-        //{
-        //    var result = await _context.Orders
-        //        .Where(o => o.ShopId % 2 == 0)
-        //        .Where(o => o.Client.City.ToLower().Contains("w"))
-        //        .Join(_context.OrderProducts,
-        //            o => o.Id,
-        //            op => op.OrderId,
-        //            (o, op) => new { o, op })
-        //        .Join(_context.Products,
-        //            combined => combined.op.ProductId,
-        //            p => p.Id,
-        //            (combined, p) => new { combined.o, combined.op, p })
-        //        .GroupBy(g => g.o.ShopId)
-        //        .Select(g => new OrderSummaryDTO
-        //        {
-        //            ShopId = g.Key,
-        //            TotalNetValue = g.Sum(x => x.op.Quantity * x.p.NetPrice)
-        //        })
-        //        .ToListAsync();
+        [HttpGet("GetSumOfOrdersValuesInShopsWithEvenIdByEF")]
+        public async Task<IActionResult> GetSumOfOrdersValuesInShopsWithEvenIdByEF()
+        {
+            var result = await _context.Orders
+                .Where(o => o.ShopId % 2 == 0)
+                .Where(o => o.Shop.City.ToLower().Contains("w"))
+                .Include(o => o.OrderProducts)
+                    .ThenInclude(op => op.Product)
+                .Select(o => new
+                {
+                    o.Id,
+                    o.ShopId,
+                    TotalNetValue = o.OrderProducts
+                        .Sum(op => op.Quantity * op.Product.NetPrice)
+                })
+                .ToListAsync();
 
-        //    return Ok(result);
-        //}
+            return Ok(result);
+        }
+
+        [HttpGet("GetSummaryOfOrdersGroupedByPaymentMethodWithOrdersGrossThan150")]
+        public async Task<IActionResult> GetSummaryOfOrdersGroupedByPaymentMethodWithOrdersGrossThan150()
+        {
+            var orderTotals = await _context.Orders
+                .Select(o => new
+                {
+                    o.Id,
+                    o.PaymentMethod,
+                    TotalGrossValue = o.OrderProducts
+                        .Sum(op => op.Quantity * op.Product.GrossPrice)
+                })
+                .Where(o => o.TotalGrossValue >= 150)
+                .ToListAsync();
+
+            var summary = orderTotals
+                .GroupBy(o => o.PaymentMethod)
+                .Select(g => new
+                {
+                    PaymentMethod = g.Key,
+                    OrderCount = g.Count(),
+                    TotalGrossValue = g.Sum(o => o.TotalGrossValue)
+                })
+                .ToList();
+
+            return Ok(summary);
+        }
     }
 }

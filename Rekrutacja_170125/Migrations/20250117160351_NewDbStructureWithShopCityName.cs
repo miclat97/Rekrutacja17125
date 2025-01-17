@@ -152,7 +152,7 @@ namespace Rekrutacja_170125.Migrations
                     { 3, "Cityw 3", "Sklep 3" },
                     { 4, "City 4", "Sklep 4" },
                     { 5, "Cityw 5", "Sklep 5" },
-                    { 6, "City 6", "Sklep 6" },
+                    { 6, "Cityw 6", "Sklep 6" },
                     { 7, "City 7", "Sklep 7" },
                     { 8, "Cityw 8", "Sklep 8" },
                     { 9, "City 9", "Sklep 9" },

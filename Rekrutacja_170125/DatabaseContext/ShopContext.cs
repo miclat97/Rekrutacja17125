@@ -39,7 +39,7 @@ namespace Rekrutacja_170125.DatabaseContext
                 new ShopEntity { Id = 3, Name = "Sklep 3", City = "Cityw 3" },
                 new ShopEntity { Id = 4, Name = "Sklep 4", City = "City 4" },
                 new ShopEntity { Id = 5, Name = "Sklep 5", City = "Cityw 5" },
-                new ShopEntity { Id = 6, Name = "Sklep 6", City = "City 6" },
+                new ShopEntity { Id = 6, Name = "Sklep 6", City = "Cityw 6" },
                 new ShopEntity { Id = 7, Name = "Sklep 7" , City = "City 7" },
                 new ShopEntity { Id = 8, Name = "Sklep 8", City = "Cityw 8" },
                 new ShopEntity { Id = 9, Name = "Sklep 9", City = "City 9" },
