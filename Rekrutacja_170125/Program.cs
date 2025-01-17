@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using Rekrutacja_170125.DatabaseContext;
+
 namespace Rekrutacja_170125
 {
     public class Program
@@ -6,8 +9,17 @@ namespace Rekrutacja_170125
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // Pobranie connection string z konfiguracji
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+            // Rejestracja kontekstu bazy danych
+            builder.Services.AddDbContext<ShopContext>(options =>
+                options.UseSqlServer(connectionString));
+
+
             // Add services to the container.
             builder.Services.AddRazorPages();
+
 
             var app = builder.Build();
 
