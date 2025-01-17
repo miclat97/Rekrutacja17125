@@ -17,40 +17,39 @@ namespace Rekrutacja_170125.Controllers
             _context = context;
         }
 
-        //[HttpGet("sql")]
-        //public async Task<IActionResult> GetSumOfOrdersValuesInShopsWithEvenIdSQL()
-        //{
-        //    var sqlQuery = @"
-        //        SELECT
-        //            o.Id AS OrderId,
-        //            o.ShopId,
-        //            SUM(op.Quantity * p.NetPrice) AS TotalNetValue
-        //        FROM
-        //            Orders o
-        //        JOIN
-        //            OrderProducts op ON o.Id = op.OrderId
-        //        JOIN
-        //            Products p ON op.ProductId = p.Id
-        //        JOIN
-        //            Clients c ON o.ClientId = c.Id
-        //        WHERE
-        //            o.ShopId % 2 = 0
-        //            AND LOWER(c.City) LIKE '%w%'
-        //        GROUP BY
-        //            o.Id, o.ShopId
-        //        ORDER BY
-        //            o.Id;
-        //    ";
+        [HttpGet("GetSumOfOrdersValuesInShopsWithEvenIdBySQL")]
+        public async Task<IActionResult> GetSumOfOrdersValuesInShopsWithEvenIdSQL()
+        {
+            var query = @"
+                SELECT
+                    o.OrderId AS OrderId,
+                    o.ShopId,
+                    SUM(op.Quantity * p.NetPrice) AS TotalNetValue
+                FROM Orders o
+                INNER JOIN Shops s ON o.ShopId = s.Id
+                INNER JOIN OrderProducts op ON o.Id = op.OrderId
+                INNER JOIN Products p ON op.ProductId = p.Id
+                WHERE
+                    o.ShopId % 2 = 0
+                    AND LOWER(s.City) LIKE '%w%'
+                GROUP BY
+                    o.Id,
+                    o.ShopId;
+            ";
 
-        //    var formattableStringQuery = FormattableStringFactory.Create(sqlQuery);
+            var result = await _context.Orders
+                .FromSqlRaw(query)
+                .Select(o => new OrderSummaryDTO
+                {
+                    OrderId = o.Id,
+                    ShopId = o.ShopId,
+                    TotalNetValue = o.OrderProducts.Sum(op => op.Quantity * op.Product.NetPrice)
+                })
+                .ToListAsync();
 
-        //    var result = await _context
-        //        .Database
-        //        .SqlQuery<OrderSummaryDTO>(formattableStringQuery)
-        //        .ToListAsync();
 
-        //    return Ok(result);
-        //}
+            return Ok(result);
+        }
 
 
         [HttpGet("GetSumOfOrdersValuesInShopsWithEvenIdByEF")]
