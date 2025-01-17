@@ -13,6 +13,8 @@
         [MaxLength(100)]
         public string Name { get; set; }
 
+        public string City { get; set; }
+
         public virtual ICollection<OrderEntity> Orders { get; set; }
     }
 }

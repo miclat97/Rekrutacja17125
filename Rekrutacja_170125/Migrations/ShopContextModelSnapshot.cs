@@ -403,6 +403,10 @@ namespace Rekrutacja_170125.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -416,51 +420,61 @@ namespace Rekrutacja_170125.Migrations
                         new
                         {
                             Id = 1,
+                            City = "City 1",
                             Name = "Sklep 1"
                         },
                         new
                         {
                             Id = 2,
+                            City = "City 2",
                             Name = "Sklep 2"
                         },
                         new
                         {
                             Id = 3,
+                            City = "Cityw 3",
                             Name = "Sklep 3"
                         },
                         new
                         {
                             Id = 4,
+                            City = "City 4",
                             Name = "Sklep 4"
                         },
                         new
                         {
                             Id = 5,
+                            City = "Cityw 5",
                             Name = "Sklep 5"
                         },
                         new
                         {
                             Id = 6,
+                            City = "City 6",
                             Name = "Sklep 6"
                         },
                         new
                         {
                             Id = 7,
+                            City = "City 7",
                             Name = "Sklep 7"
                         },
                         new
                         {
                             Id = 8,
+                            City = "Cityw 8",
                             Name = "Sklep 8"
                         },
                         new
                         {
                             Id = 9,
+                            City = "City 9",
                             Name = "Sklep 9"
                         },
                         new
                         {
                             Id = 10,
+                            City = "City 10",
                             Name = "Sklep 10"
                         });
                 });

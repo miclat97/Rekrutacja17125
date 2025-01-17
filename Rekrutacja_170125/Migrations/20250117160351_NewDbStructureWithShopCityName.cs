@@ -7,7 +7,7 @@
 namespace Rekrutacja_170125.Migrations
 {
     /// <inheritdoc />
-    public partial class NewInitialDatabase : Migration
+    public partial class NewDbStructureWithShopCityName : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -48,7 +48,8 @@ namespace Rekrutacja_170125.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -112,13 +113,13 @@ namespace Rekrutacja_170125.Migrations
                 columns: new[] { "Id", "City", "PostalCode", "Street" },
                 values: new object[,]
                 {
-                    { 1, "Cityw 1", "11111", "Street 1" },
+                    { 1, "City 1", "11111", "Street 1" },
                     { 2, "City 2", "22222", "Street 2" },
                     { 3, "City 3", "33333", "Street 3" },
-                    { 4, "Cityw 4", "44444", "Street 4" },
+                    { 4, "City 4", "44444", "Street 4" },
                     { 5, "City 5", "55555", "Street 5" },
                     { 6, "City 6", "66666", "Street 6" },
-                    { 7, "Cityw 7", "77777", "Street 7" },
+                    { 7, "City 7", "77777", "Street 7" },
                     { 8, "City 8", "88888", "Street 8" },
                     { 9, "City 9", "99999", "Street 9" },
                     { 10, "City 10", "10101", "Street 10" }
@@ -143,19 +144,19 @@ namespace Rekrutacja_170125.Migrations
 
             migrationBuilder.InsertData(
                 table: "Shops",
-                columns: new[] { "Id", "Name" },
+                columns: new[] { "Id", "City", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Sklep 1" },
-                    { 2, "Sklep 2" },
-                    { 3, "Sklep 3" },
-                    { 4, "Sklep 4" },
-                    { 5, "Sklep 5" },
-                    { 6, "Sklep 6" },
-                    { 7, "Sklep 7" },
-                    { 8, "Sklep 8" },
-                    { 9, "Sklep 9" },
-                    { 10, "Sklep 10" }
+                    { 1, "City 1", "Sklep 1" },
+                    { 2, "City 2", "Sklep 2" },
+                    { 3, "Cityw 3", "Sklep 3" },
+                    { 4, "City 4", "Sklep 4" },
+                    { 5, "Cityw 5", "Sklep 5" },
+                    { 6, "City 6", "Sklep 6" },
+                    { 7, "City 7", "Sklep 7" },
+                    { 8, "Cityw 8", "Sklep 8" },
+                    { 9, "City 9", "Sklep 9" },
+                    { 10, "City 10", "Sklep 10" }
                 });
 
             migrationBuilder.InsertData(

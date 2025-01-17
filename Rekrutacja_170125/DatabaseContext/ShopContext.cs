@@ -34,16 +34,16 @@ namespace Rekrutacja_170125.DatabaseContext
                 .HasForeignKey(op => op.ProductId);
 
             modelBuilder.Entity<ShopEntity>().HasData(
-                new ShopEntity { Id = 1, Name = "Sklep 1" },
-                new ShopEntity { Id = 2, Name = "Sklep 2" },
-                new ShopEntity { Id = 3, Name = "Sklep 3" },
-                new ShopEntity { Id = 4, Name = "Sklep 4" },
-                new ShopEntity { Id = 5, Name = "Sklep 5" },
-                new ShopEntity { Id = 6, Name = "Sklep 6" },
-                new ShopEntity { Id = 7, Name = "Sklep 7" },
-                new ShopEntity { Id = 8, Name = "Sklep 8" },
-                new ShopEntity { Id = 9, Name = "Sklep 9" },
-                new ShopEntity { Id = 10, Name = "Sklep 10" }
+                new ShopEntity { Id = 1, Name = "Sklep 1", City = "City 1" },
+                new ShopEntity { Id = 2, Name = "Sklep 2", City = "City 2" },
+                new ShopEntity { Id = 3, Name = "Sklep 3", City = "Cityw 3" },
+                new ShopEntity { Id = 4, Name = "Sklep 4", City = "City 4" },
+                new ShopEntity { Id = 5, Name = "Sklep 5", City = "Cityw 5" },
+                new ShopEntity { Id = 6, Name = "Sklep 6", City = "City 6" },
+                new ShopEntity { Id = 7, Name = "Sklep 7" , City = "City 7" },
+                new ShopEntity { Id = 8, Name = "Sklep 8", City = "Cityw 8" },
+                new ShopEntity { Id = 9, Name = "Sklep 9", City = "City 9" },
+                new ShopEntity { Id = 10, Name = "Sklep 10" , City = "City 10" }
             );
 
             modelBuilder.Entity<ProductEntity>().HasData(
@@ -60,13 +60,13 @@ namespace Rekrutacja_170125.DatabaseContext
             );
 
             modelBuilder.Entity<ClientEntity>().HasData(
-                new ClientEntity { Id = 1, Street = "Street 1", City = "Cityw 1", PostalCode = "11111" },
+                new ClientEntity { Id = 1, Street = "Street 1", City = "City 1", PostalCode = "11111" },
                 new ClientEntity { Id = 2, Street = "Street 2", City = "City 2", PostalCode = "22222" },
                 new ClientEntity { Id = 3, Street = "Street 3", City = "City 3", PostalCode = "33333" },
-                new ClientEntity { Id = 4, Street = "Street 4", City = "Cityw 4", PostalCode = "44444" },
+                new ClientEntity { Id = 4, Street = "Street 4", City = "City 4", PostalCode = "44444" },
                 new ClientEntity { Id = 5, Street = "Street 5", City = "City 5", PostalCode = "55555" },
                 new ClientEntity { Id = 6, Street = "Street 6", City = "City 6", PostalCode = "66666" },
-                new ClientEntity { Id = 7, Street = "Street 7", City = "Cityw 7", PostalCode = "77777" },
+                new ClientEntity { Id = 7, Street = "Street 7", City = "City 7", PostalCode = "77777" },
                 new ClientEntity { Id = 8, Street = "Street 8", City = "City 8", PostalCode = "88888" },
                 new ClientEntity { Id = 9, Street = "Street 9", City = "City 9", PostalCode = "99999" },
                 new ClientEntity { Id = 10, Street = "Street 10", City = "City 10", PostalCode = "10101" }
