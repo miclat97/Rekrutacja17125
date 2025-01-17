@@ -112,13 +112,13 @@ namespace Rekrutacja_170125.Migrations
                 columns: new[] { "Id", "City", "PostalCode", "Street" },
                 values: new object[,]
                 {
-                    { 1, "City 1", "11111", "Street 1" },
+                    { 1, "Cityw 1", "11111", "Street 1" },
                     { 2, "City 2", "22222", "Street 2" },
                     { 3, "City 3", "33333", "Street 3" },
-                    { 4, "City 4", "44444", "Street 4" },
+                    { 4, "Cityw 4", "44444", "Street 4" },
                     { 5, "City 5", "55555", "Street 5" },
                     { 6, "City 6", "66666", "Street 6" },
-                    { 7, "City 7", "77777", "Street 7" },
+                    { 7, "Cityw 7", "77777", "Street 7" },
                     { 8, "City 8", "88888", "Street 8" },
                     { 9, "City 9", "99999", "Street 9" },
                     { 10, "City 10", "10101", "Street 10" }
