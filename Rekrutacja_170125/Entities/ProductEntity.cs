@@ -16,5 +16,7 @@ namespace Rekrutacja_170125.Entities
 
         [Required]
         public decimal GrossPrice { get; set; }
+
+        public virtual ICollection<OrderProductEntity> OrderProducts { get; set; }
     }
 }

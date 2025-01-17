@@ -19,7 +19,7 @@ namespace Rekrutacja_170125.Entities
 
         public PaymentMethod PaymentMethod { get; set; }
 
-        public virtual ICollection<ProductEntity> Products { get; set; }
+        public virtual ICollection<OrderProductEntity> OrderProducts { get; set; }
     }
 
     public enum PaymentMethod

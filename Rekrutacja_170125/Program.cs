@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Rekrutacja_170125.DatabaseContext;
+using Rekrutacja_170125.Entities;
 
 namespace Rekrutacja_170125
 {
@@ -9,10 +10,10 @@ namespace Rekrutacja_170125
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Pobranie connection string z konfiguracji
+            // Connection string from configuration
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-            // Rejestracja kontekstu bazy danych
+            // Context registration
             builder.Services.AddDbContext<ShopContext>(options =>
                 options.UseSqlServer(connectionString));
 
@@ -33,6 +34,8 @@ namespace Rekrutacja_170125
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.MapControllers();
 
             app.UseRouting();
 
